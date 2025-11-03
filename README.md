@@ -65,3 +65,23 @@ It demonstrates how to collect, process, predict, and visualize sensor data from
 ```
 
 
+
+##  Visualization & Analytics
+
+###  Real-Time
+
+- **InfluxDB UI** – Used locally to visualize telemetry streams such as **temperature**, **humidity**, and **occupancy**.
+
+---
+
+### Historical
+
+- **Amazon S3 (Data Lake)** – Stores raw telemetry JSON files streamed from IoT Core.
+- **Amazon Athena + AWS Glue** – Enables SQL-based querying and aggregation over historical telemetry data for analytics and reporting.
+- **Amazon CloudWatch Logs Insights** – Analyze Lambda execution logs, detect anomalies, and troubleshoot issues using queries such as:
+
+  ```sql
+  fields @timestamp, @message
+  | filter @message like /ERROR/
+  | sort @timestamp desc
+  | limit 20
