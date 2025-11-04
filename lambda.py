@@ -61,7 +61,7 @@ def lambda_handler(event, context):
         fan_speed_pred = fan_speed_map.get(fan_speed_enc_pred, "unknown")
         
         command_topic = f"building/{data['building']}/zone/{data['zone']}/command"
-        payload = {"zone_id": data["zone"], "set_temp": round(set_temp_pred, 1), "fan_speed": fan_speed_pred}
+        payload = {"building": data["building"], "zone_id": data["zone"], "set_temp": round(set_temp_pred, 1), "fan_speed": fan_speed_pred}
         # send command back to the simulator
         iot_data.publish(topic=command_topic, qos=1, payload=json.dumps(payload))
         
