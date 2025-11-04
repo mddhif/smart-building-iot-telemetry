@@ -56,10 +56,7 @@ The simulator (or a local bridge client) also forwards telemetry to a local Infl
 | **Simulator** | Publishes telemetry data (`temperature`, `humidity`, `occupancy`) to AWS IoT Core MQTT topics like `building/{id}/zone/{id}/telemetry`. |
 | **AWS IoT Core** | Central IoT hub that routes telemetry to multiple destinations (S3, Kinesis, Lambda). |
 | **AWS Kinesis** | Streams real-time telemetry events for downstream analytics and Lambda processing. |
-| **AWS Lambda** |- Hosts the **AI inference logic** using a lightweight **ONNX model** to predict `set_temp` and `fan_speed` values based on incoming telemetry (`temperature`, `humidity`, `occupancy`).
-- Publishes predicted commands back to IoT Core topics for simulators to consume.
-- Stores raw and processed telemetry into **DynamoDB** for quick lookups.
-- **Note:** A more scalable approach could use **Amazon SageMaker** or an **ECS container** running the AI logic, but to keep this example simple, **AWS Lambda** is used here.
+| **AWS Lambda** |- Hosts the **AI inference logic** using a lightweight **ONNX model** to predict `set_temp` and `fan_speed` values based on incoming telemetry (`temperature`, `humidity`, `occupancy`). - Publishes predicted commands back to IoT Core topics for simulators to consume. - Stores raw and processed telemetry into **DynamoDB** for quick lookups. - **Note:** A more scalable approach could use **Amazon SageMaker** or an **ECS container** running the AI logic, but to keep this example simple, **AWS Lambda** is used here.
  |
 | **DynamoDB** | NoSQL database storing structured telemetry and prediction results. |
 | **InfluxDB (Local)** | Time-series database for visualizing telemetry trends in real time. |
